@@ -1,5 +1,5 @@
 title = "青石博客"
-base_url = "https://duckquill.daudix.one"
+base_url = "https://blog.hillrime.xyz"
 description = "有主见、现代、漂亮、简洁的 Zola 主题。"
 
 compile_sass = true
