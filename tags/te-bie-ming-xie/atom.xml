@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-Hans">
+    <title>青石博客 - 特别鸣谢</title>
+    <subtitle>有主见、现代、漂亮、简洁的 Zola 主题。</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://blog.hillrime.xyz/tags/te-bie-ming-xie/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.hillrime.xyz"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-01-07T00:00:00+00:00</updated>
+    <id>https://blog.hillrime.xyz/tags/te-bie-ming-xie/atom.xml</id>
+    <entry xml:lang="zh-Hans">
+        <title>特别鸣谢</title>
+        <published>2026-01-07T00:00:00+00:00</published>
+        <updated>2026-01-07T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            青石
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.hillrime.xyz/blog/special-thanks/"/>
+        <id>https://blog.hillrime.xyz/blog/special-thanks/</id>
+        
+        <content type="html" xml:base="https://blog.hillrime.xyz/blog/special-thanks/">&lt;p&gt;在这里一定要感谢的人就是迪奇（Dich）老师，如果没有他我绝对不可能整出这个网站。说来能有兴趣写这个搭建这个博客也是多亏了迪奇老师。这里放一个老师的博客链接，&lt;a href=&quot;https:&#x2F;&#x2F;blog.dich.bid&#x2F;&quot;&gt;迪奇老师的博客&lt;&#x2F;a&gt;，里面有超多实用博客，用过都说好。&lt;&#x2F;p&gt;
+&lt;p&gt;这个博客的搭建过程也是一波三折，甚至在挑选博客主题的时候就遇到了麻烦，构建项目的时候怎么都跑不起来，一度以为是zola版本不对，后来才发现是代码本身的问题（小生也是没招了，谁能想到示例工程居然会跑不起来），虽然这个主题模板代码问题多多，但奈何本人颜狗实在喜欢这个主题的UI设计，硬是死磕磕出来了，然而真正的苦难才刚刚开始。&lt;&#x2F;p&gt;
+&lt;p&gt;本人的水平比较垃圾，遇到网络相关的问题更是想一头撞死在墙上，经常猪脑过载，大脑空空，不知道接下来咋办，在这里还是要感谢迪奇老师大力支持，整个网站后面的部署工程可以说都是老师亲手完成的，我在旁边起到了一个吉祥物的作用（可能也并没有那么吉祥，因为问题依然多多）。搭建博客后半段其问题之烧脑，耗时之长，波折之多令我感到十分恐惧，麻烦程度令人发指，像什么部署了半天部署不下来呀，Cloudflare申请一个多小时呀，部署方法换一个死一个呀，zola版本太新部署又不支持呀，如果没有迪奇老师我是真的绝对不会碰这个的，感谢老师，你是我的神。&lt;&#x2F;p&gt;
+&lt;p&gt;今后这个博客我可能会当半个空间用，没事的时候整点没营养的垃圾啥的，作者文笔垃圾，基本流水账文学，梦到那里说那里，虽然能拿到我这个博客的网址的估计都是熟人，应该都是很清楚我的作风了，但是鉴于这是我的第一篇博客所以还是正经一点，放个预警在这里，博客产量基本随缘，随缘更新，随缘维护。以及，这是一篇特别鸣谢，没错，最后我还是要感谢迪奇老师（重要的事要说三遍！！！！！），这篇特别鸣谢我将一直挂在我的博客里，以表我对老师的感激之情♥️&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>
