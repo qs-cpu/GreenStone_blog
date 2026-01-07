@@ -14,6 +14,7 @@ Blog = "博客"
 Demo = "演示"
 Mods = "模组"
 Coffee = "赞助"
+special_thanks = "特别鸣谢"
 
 alert_caution = "注意"
 alert_important = "重要"

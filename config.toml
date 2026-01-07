@@ -11,8 +11,8 @@ feed_filenames = ["rss.xml", "atom.xml"]
 build_search_index = true
 author = "Duck Quack"
 
-# 删除默认语言设置，因为现在只使用单一语言
-# default_language = "zh-Hans"
+
+default_language = "zh-Hans"
 
 taxonomies = [{ name = "tags", feed = true }]
 
@@ -143,10 +143,8 @@ show_repo = true
 # See https://www.getzola.org/documentation/content/linking/#internal-links
 links = [
 	{ name = "Links", menu = [
-		{ url = "@/blog/_index.md", name = "Blog" },
-		{ url = "@/demo/index.md", name = "Demo" }
-	] },
-	{ url = "https://daudix.one/coffee/", name = "Coffee" }
+		{ url = "@/blog/_index.md", name = "Blog" }
+	] }
 ]
 
 [extra.footer]
@@ -154,8 +152,7 @@ links = [
 # Same as the nav ones.
 links = [
 	{ url = "@/blog/_index.md", name = "Blog" },
-	{ url = "@/demo/index.md", name = "Demo" },
-	{ url = "https://daudix.one/coffee/", name = "Coffee" }
+	{ url = "@/blog/special_thanks.md", name = "special_thanks"}
 ]
 # Social links in the footer.
 # Any URL-encoded SVG can be used as an icon.

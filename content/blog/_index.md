@@ -1,11 +1,16 @@
 +++
-title = "博客"
-description = "最新文章"
-sort_by = "date"
-page_template = "article.html"
-insert_anchor_links = "left"
+title = " " 
+sort_by = "date" 
+template = "article_list.html" 
+page_template = "article.html" 
+paginate_by = 5 
 +++
+{% crt() %}
+```
+      _          _          _          _          _          _          _
+    >(')____,  >(')____,  >(')____,  >(')____,  >(')____,  >(')____,  >(') ___,
+      (` =~~/    (` =~~/    (` =~~/    (` =~~/    (` =~~/    (` =~~/    (` =~~/
+jgs~^~^`---'~^~^~^`---'~^~^~^`---'~^~^~^`---'~^~^~^`---'~^~^~---'~^~^~^`---'~^~^~^`---'~^~^~
+```
+{% end %}
 
-# 博客文章
-
-这里是我分享的所有文章。
