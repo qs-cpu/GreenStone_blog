@@ -13,7 +13,7 @@ Docs are provided in form of a [live demo](https://duckquill.daudix.one).
 
 ## Know your rights
 
-This project is under the MIT license:
+This project is under the MIT license
 
 - **Freedom to Use**: You have the right to use the software for any purpose, whether it's personal, academic, or commercial.
 - **Freedom to Modify**: You can modify the source code of the software to suit your needs or preferences.
