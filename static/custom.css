@@ -1,0 +1,120 @@
+/* 黑暗模式下将小黄鸭黄色元素变为绿色 */
+[data-theme="dark"] {
+  /* 覆盖黄色变量为绿色 */
+  --yellow-fg: #38a169 !important;  /* 绿色前景色 */
+  --yellow-bg: rgba(56, 161, 105, 0.1) !important;  /* 绿色背景色 */
+  
+  /* 侧边栏样式 - 将侧边栏背景和文字颜色改为绿色系 */
+  --accent-color: #38a169 !important;  /* 主要强调色改为绿色 */
+  --accent-color-dark: #2f855a !important;  /* 深色模式下的强调色 */
+  --accent-color-alpha: rgba(56, 161, 105, 0.1) !important;  /* 绿色透明背景 */
+}
+
+/* 确保归档样式保持紫色不变 */
+[data-theme="dark"] .statement-container.archive {
+  background-color: var(--purple-bg) !important;
+  color: var(--purple-fg) !important;
+}
+
+/* 只针对小黄鸭样式应用绿色 */
+[data-theme="dark"] .statement-container.trigger {
+  background-color: var(--yellow-bg) !important;
+  color: var(--yellow-fg) !important;
+}
+
+/* 保持标签的原有样式 - 特别处理悬停状态 */
+[data-theme="dark"] .tags a {
+  /* 标签使用原有的样式，不应用绿色 */
+  background-color: var(--fg-muted-1) !important;
+  color: var(--fg-muted-5) !important;
+}
+
+[data-theme="dark"] .tags a:hover {
+  /* 标签悬停时使用橙色主题，而不是绿色 */
+  background-color: rgba(255, 120, 0, 0.1) !important;
+  color: #ff7800 !important;
+}
+
+[data-theme="dark"] .tags a:hover .count {
+  background-color: rgba(255, 120, 0, 0.1) !important;
+  color: #ff7800 !important;
+}
+
+/* 特别确保文章列表中的标签保持原有样式 */
+[data-theme="dark"] .article-list-item .tags a {
+  background-color: var(--fg-muted-1) !important;
+  color: var(--fg-muted-5) !important;
+}
+
+[data-theme="dark"] .article-list-item .tags a:hover {
+  background-color: rgba(255, 120, 0, 0.1) !important;
+  color: #ff7800 !important;
+}
+
+/* 黑暗模式下导航栏的绿色样式 */
+[data-theme="dark"] #site-nav {
+  background-color: rgba(56, 161, 105, 0.05) !important;
+}
+
+[data-theme="dark"] #site-nav nav a:hover {
+  background-color: rgba(56, 161, 105, 0.1) !important;
+  color: var(--yellow-fg) !important;
+}
+
+/* 黑暗模式下按钮的绿色样式 */
+[data-theme="dark"] button,
+[data-theme="dark"] .button {
+  background-color: var(--yellow-bg) !important;
+  color: var(--yellow-fg) !important;
+  border-color: var(--yellow-fg) !important;
+}
+
+[data-theme="dark"] button:hover,
+[data-theme="dark"] .button:hover {
+  background-color: var(--yellow-fg) !important;
+  color: white !important;
+}
+
+/* 黑暗模式下链接的绿色样式 - 但不影响标签 */
+[data-theme="dark"] a:not(.tags a) {
+  color: var(--yellow-fg) !important;
+}
+
+[data-theme="dark"] a:not(.tags a):hover {
+  color: #2f855a !important;
+}
+
+/* 黑暗模式下文章列表中的小黄鸭标题样式 */
+[data-theme="dark"] .article-list-item.trigger h3 {
+  color: var(--yellow-fg) !important;
+}
+
+[data-theme="dark"] .article-list-item.trigger .badge {
+  background-color: var(--yellow-bg) !important;
+  color: var(--yellow-fg) !important;
+}
+
+/* 黑暗模式下评论区域的绿色样式 */
+[data-theme="dark"] #comments {
+  border-color: var(--yellow-fg) !important;
+}
+
+[data-theme="dark"] #comments button {
+  background-color: var(--yellow-bg) !important;
+  color: var(--yellow-fg) !important;
+}
+
+[data-theme="dark"] #comments button:hover {
+  background-color: var(--yellow-fg) !important;
+  color: white !important;
+}
+
+/* 保持日常模式不变 - 只在黑暗模式应用绿色 */
+[data-theme="light"] {
+  /* 保持原有的橙色/黄色主题 */
+  --yellow-fg: rgb(156, 110, 3) !important;
+  --yellow-bg: rgba(156, 110, 3, 0.1) !important;
+  --accent-color: #ff7800 !important;
+  --accent-color-dark: #ffa348 !important;
+  --accent-color-alpha: rgba(255, 120, 0, 0.1) !important;
+}
