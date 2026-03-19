@@ -22,35 +22,6 @@
   color: var(--yellow-fg) !important;
 }
 
-/* 保持标签的原有样式 - 特别处理悬停状态 */
-[data-theme="dark"] .tags a {
-  /* 标签使用原有的样式，不应用绿色 */
-  background-color: var(--fg-muted-1) !important;
-  color: var(--fg-muted-5) !important;
-}
-
-[data-theme="dark"] .tags a:hover {
-  /* 标签悬停时使用橙色主题，而不是绿色 */
-  background-color: rgba(255, 120, 0, 0.1) !important;
-  color: #ff7800 !important;
-}
-
-[data-theme="dark"] .tags a:hover .count {
-  background-color: rgba(255, 120, 0, 0.1) !important;
-  color: #ff7800 !important;
-}
-
-/* 特别确保文章列表中的标签保持原有样式 */
-[data-theme="dark"] .article-list-item .tags a {
-  background-color: var(--fg-muted-1) !important;
-  color: var(--fg-muted-5) !important;
-}
-
-[data-theme="dark"] .article-list-item .tags a:hover {
-  background-color: rgba(255, 120, 0, 0.1) !important;
-  color: #ff7800 !important;
-}
-
 /* 黑暗模式下导航栏的绿色样式 */
 [data-theme="dark"] #site-nav {
   background-color: rgba(56, 161, 105, 0.05) !important;
@@ -75,13 +46,24 @@
   color: white !important;
 }
 
-/* 黑暗模式下链接的绿色样式 - 但不影响标签 */
-[data-theme="dark"] a:not(.tags a) {
-  color: var(--yellow-fg) !important;
+/* 黑暗模式下链接的绿色样式 - 使用低优先级，以便特定样式（如标签）可以覆盖它 */
+[data-theme="dark"] a {
+  color: var(--yellow-fg);
 }
 
-[data-theme="dark"] a:not(.tags a):hover {
-  color: #2f855a !important;
+[data-theme="dark"] a:hover {
+  color: #2f855a;
+}
+
+/* 恢复标签默认样式，但不使用 !important，以便 SASS 中的 .archive/.hot 等特定样式可以覆盖这里 */
+[data-theme="dark"] .tags a {
+  background-color: var(--fg-muted-1);
+  color: var(--fg-muted-5);
+}
+
+[data-theme="dark"] .tags a:hover {
+  background-color: var(--accent-color-alpha);
+  color: var(--accent-color);
 }
 
 /* 黑暗模式下文章列表中的小黄鸭标题样式 */
