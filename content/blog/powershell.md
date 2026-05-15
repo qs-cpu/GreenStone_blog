@@ -75,33 +75,33 @@ Set-PSReadLineKeyHandler -Key Ctrl+u -Function BackwardDeleteLine
 # Ctrl+K → 删除从光标到行尾
 Set-PSReadLineKeyHandler -Key Ctrl+k -Function ForwardDeleteLine
 ```
-保存后重启终端可看到美化和其他功能均出现，但有可能出现乱码，此为字体问题，修复步骤如下
-1、打开终端
-2、输入ctrl+,
-3、点击配置文件下的默认值
-4、点击默认值中的外观
-5、选择字体为JetBrainsMono Nerd Font（极端情况下需要安装字体包，如果字体包安装完后依然没有显示该字体，可以直接输入这个字体名进行使用）
-6、保存
+保存后重启终端可看到美化和其他功能均出现，但有可能出现乱码，此为字体问题，修复步骤如下  
+1、打开终端  
+2、输入ctrl+,  
+3、点击配置文件下的默认值  
+4、点击默认值中的外观  
+5、选择字体为JetBrainsMono Nerd Font（极端情况下需要安装字体包，如果字体包安装完后依然没有显示该字体，可以直接输入这个字体名进行使用）  
+6、保存  
 设置完可以看到终端正常显示了
 
 ## Ubuntu shell强化
 
-首先我们来了解一下Terminal（终端），shell和命令行的区别：
+首先我们来了解一下Terminal（终端），shell和命令行的区别：  
 终端是界面工具，负责显示和输入，它本身不会执行命令，他只是把你的输入交给shell处理
-shell是核心执行者，负责解析你输入的命令并交给操作系统执行
+shell是核心执行者，负责解析你输入的命令并交给操作系统执行  
 命令行是一种操作方式，即指令本身
 
-由此可见shell是一切的核心，而我们的强化可以从他开始。
-主流的shell是bash，zsh，fish，而他们三个的优缺点如下：
-1、bash的兼容性最强最稳定，学习资源最多，但是交互体验比较原始，自动补全等提示不够智能
-2、zsh有强大的自动补全，支持插件系统，但是配置比较复杂，写脚本时有些细节和bash会有所不同
-3、fish最简单，语法更直观，对人最友好，但是缺点也是最大最明显的，他不兼容bash脚本，并且社区和生态都比较差
+由此可见shell是一切的核心，而我们的强化可以从他开始。  
+主流的shell是bash，zsh，fish，而他们三个的优缺点如下：  
+1、bash的兼容性最强最稳定，学习资源最多，但是交互体验比较原始，自动补全等提示不够智能  
+2、zsh有强大的自动补全，支持插件系统，但是配置比较复杂，写脚本时有些细节和bash会有所不同  
+3、fish最简单，语法更直观，对人最友好，但是缺点也是最大最明显的，他不兼容bash脚本，并且社区和生态都比较差  
 
 由此可以看出我们的选择是zsh
 
-配置zsh的步骤如下
-1、打开终端
-2、输入以下命令安装zsh
+配置zsh的步骤如下  
+1、打开终端  
+2、输入以下命令安装zsh  
 ```bash
 sudo apt update
 sudo apt install zsh -y
@@ -144,11 +144,9 @@ You can:
 
 --- Type one of the keys in parentheses ---
 ```
-选择0，创建一个最干净的 .zshrc 文件，防止与我们后续设置有冲突
-
-5、输入echo $0，查看是为zsh
-
-6、输入nano ~/.zshrc
+选择0，创建一个最干净的 .zshrc 文件，防止与我们后续设置有冲突  
+5、输入echo $0，查看是为zsh  
+6、输入nano ~/.zshrc  
 7、在改文件中输入以下配置
 ```
 # Created by newuser for 5.9
@@ -250,10 +248,10 @@ git clone https://github.com/Aloxaf/fzf-tab
 sudo apt install fzf -y
 sudo apt install eza -y
 ```
-这三个插件分别是：
-zsh-autosuggestions右箭头自动补全（你最想要的）
-zsh-syntax-highlighting命令高亮（绿色 / 红色）
-fzf-tab TAB 补全（模糊搜索 + 下拉选择）
+这三个插件分别是：  
+zsh-autosuggestions右箭头自动补全（你最想要的）  
+zsh-syntax-highlighting命令高亮（绿色 / 红色）  
+fzf-tab TAB 补全（模糊搜索 + 下拉选择）  
 
 eza是ls的增强版，支持图标、颜色等。
 

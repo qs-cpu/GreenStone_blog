@@ -17,10 +17,10 @@ winget upgrade Microsoft.AppInstaller
 ```
 但是命令的执行之后并没有进行更新，而微软商店更新又太麻烦了，那么有没有更简单快捷的方法呢？
 
-在github中有一个winget-cli项目可以用来更新winget
-[](https://github.com/microsoft/winget-cli)
-进入网页后下载Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle 
-接下来有一些坑，所以先列出正确的解决方法
+在github中有一个winget-cli项目可以用来更新winget  
+[winget](https://github.com/microsoft/winget-cli)
+进入网页后下载Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle   
+接下来有一些坑，所以先列出正确的解决方法  
 下载之后双击该包会发现无法运行，这时要打开终端，输入以下命令
 ```powershell
 Add-AppxPackage -Path <你的路径>\Microsoft.DesktopAppInstaller_*.msixbundle -ForceApplicationShutdown
