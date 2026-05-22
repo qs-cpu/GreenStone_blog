@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-Hans">
+    <title>青石博客 - win</title>
+    <subtitle>有主见、现代、漂亮、简洁的 Zola 主题。</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://blog.hillrime.xyz/tags/win/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.hillrime.xyz"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-04-18T00:00:00+00:00</updated>
+    <id>https://blog.hillrime.xyz/tags/win/atom.xml</id>
+    <entry xml:lang="zh-Hans">
+        <title>winget版本老旧解决方法</title>
+        <published>2026-04-18T00:00:00+00:00</published>
+        <updated>2026-04-18T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            青石
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.hillrime.xyz/blog/wingetfix/"/>
+        <id>https://blog.hillrime.xyz/blog/wingetfix/</id>
+        
+        <content type="html" xml:base="https://blog.hillrime.xyz/blog/wingetfix/">&lt;p&gt;在使用UniGet的时候遇到了winget源下载失败，原因是winget版本太旧，这里给出更新winget的方法。&lt;&#x2F;p&gt;
+&lt;p&gt;先问了一手AI，他最早给出的回答是通过微软商店更新App Installer或者输入如下命令&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;bash&quot;&gt;winget upgrade Microsoft.AppInstaller
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;但是命令的执行之后并没有进行更新，而微软商店更新又太麻烦了，那么有没有更简单快捷的方法呢？&lt;&#x2F;p&gt;
+&lt;p&gt;在github中有一个winget-cli项目可以用来更新winget&lt;br &#x2F;&gt;
+&lt;a rel=&quot;noopener nofollow noreferrer external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;microsoft&#x2F;winget-cli&quot;&gt;winget&lt;&#x2F;a&gt;
+进入网页后下载Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle&lt;br &#x2F;&gt;
+接下来有一些坑，所以先列出正确的解决方法&lt;br &#x2F;&gt;
+下载之后双击该包会发现无法运行，这时要打开终端，输入以下命令&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;powershell&quot;&gt;Add-AppxPackage -Path &amp;lt;你的路径&amp;gt;\Microsoft.DesktopAppInstaller_*.msixbundle -ForceApplicationShutdown
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;然后问题就解决了。&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title>青石博客 - shell</title>
+      <link>https://blog.hillrime.xyz</link>
+      <description>有主见、现代、漂亮、简洁的 Zola 主题。</description>
+      <generator>Zola</generator>
+      <language>zh-Hans</language>
+      <atom:link href="https://blog.hillrime.xyz/tags/shell/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Sat, 18 Apr 2026 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>powershell与Ubuntu shell强化</title>
+          <pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate>
+          <author>青石</author>
+          <link>https://blog.hillrime.xyz/blog/powershell/</link>
+          <guid>https://blog.hillrime.xyz/blog/powershell/</guid>
+          <description xml:base="https://blog.hillrime.xyz/blog/powershell/">&lt;p&gt;在开发过程中经常会用到命令行操作，接下来要对他们进行强化。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;powershellqiang-hua&quot;&gt;Powershell强化&lt;&#x2F;h2&gt;
+&lt;p&gt;我们的目标是要让powershell有自动补全，查看历史记录，命令高亮和Git提示，样式优化。&lt;&#x2F;p&gt;
+&lt;p&gt;安装模块&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;bash&quot;&gt;# 模糊搜索工具
+winget install junegunn.fzf
+# 验证安装
+fzf --version
+# 智能目录跳转
+winget install ajeetdsouza.zoxide
+# 验证安装
+zoxide --version
+# Git 状态显示 需要管理员权限
+Install-Module posh-git -Force
+# 验证安装
+Get-InstalledModule posh-git
+# 安装Oh My Posh
+winget install JanDeDobbeleer.OhMyPosh
+#验证安装
+oh-my-posh version
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;安装图标字体&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;bash&quot;&gt;oh-my-posh font install
+# 推荐选择：JetBrainsMono
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;写入配置文件&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;bash&quot;&gt;notepad $PROFILE
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;配置文件&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;text&quot;&gt;# ---------- PSReadLine ----------
+Import-Module PSReadLine
+Set-PSReadLineOption -PredictionSource History
+Set-PSReadLineOption -PredictionViewStyle InlineView
+
+# ---------- Git ----------
+Import-Module posh-git
+
+# ---------- fzf ----------
+Import-Module PSFzf
+Set-PsFzfOption -PSReadlineChordProvider &amp;#39;Ctrl+t&amp;#39; -PSReadlineChordReverseHistory &amp;#39;Ctrl+r&amp;#39;
+
+# ---------- zoxide ----------
+Invoke-Expression (&amp;amp; { (zoxide init powershell | Out-String) })
+
+# ---------- oh-my-posh ----------
+
+oh-my-posh init pwsh | Invoke-Expression
+
+# ---------- Bash-style line editing ----------
+
+# Ctrl+A → 行首
+Set-PSReadLineKeyHandler -Key Ctrl+a -Function BeginningOfLine
+# Ctrl+E → 行尾
+Set-PSReadLineKeyHandler -Key Ctrl+e -Function EndOfLine
+# Ctrl+U → 删除从光标到行首
+Set-PSReadLineKeyHandler -Key Ctrl+u -Function BackwardDeleteLine
+# Ctrl+K → 删除从光标到行尾
+Set-PSReadLineKeyHandler -Key Ctrl+k -Function ForwardDeleteLine
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;保存后重启终端可看到美化和其他功能均出现，但有可能出现乱码，此为字体问题，修复步骤如下&lt;br &#x2F;&gt;
+1、打开终端&lt;br &#x2F;&gt;
+2、输入ctrl+,&lt;br &#x2F;&gt;
+3、点击配置文件下的默认值&lt;br &#x2F;&gt;
+4、点击默认值中的外观&lt;br &#x2F;&gt;
+5、选择字体为JetBrainsMono Nerd Font（极端情况下需要安装字体包，如果字体包安装完后依然没有显示该字体，可以直接输入这个字体名进行使用）&lt;br &#x2F;&gt;
+6、保存&lt;br &#x2F;&gt;
+设置完可以看到终端正常显示了&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;ubuntu-shellqiang-hua&quot;&gt;Ubuntu shell强化&lt;&#x2F;h2&gt;
+&lt;p&gt;首先我们来了解一下Terminal（终端），shell和命令行的区别：&lt;br &#x2F;&gt;
+终端是界面工具，负责显示和输入，它本身不会执行命令，他只是把你的输入交给shell处理
+shell是核心执行者，负责解析你输入的命令并交给操作系统执行&lt;br &#x2F;&gt;
+命令行是一种操作方式，即指令本身&lt;&#x2F;p&gt;
+&lt;p&gt;由此可见shell是一切的核心，而我们的强化可以从他开始。&lt;br &#x2F;&gt;
+主流的shell是bash，zsh，fish，而他们三个的优缺点如下：&lt;br &#x2F;&gt;
+1、bash的兼容性最强最稳定，学习资源最多，但是交互体验比较原始，自动补全等提示不够智能&lt;br &#x2F;&gt;
+2、zsh有强大的自动补全，支持插件系统，但是配置比较复杂，写脚本时有些细节和bash会有所不同&lt;br &#x2F;&gt;
+3、fish最简单，语法更直观，对人最友好，但是缺点也是最大最明显的，他不兼容bash脚本，并且社区和生态都比较差&lt;&#x2F;p&gt;
+&lt;p&gt;由此可以看出我们的选择是zsh&lt;&#x2F;p&gt;
+&lt;p&gt;配置zsh的步骤如下&lt;br &#x2F;&gt;
+1、打开终端&lt;br &#x2F;&gt;
+2、输入以下命令安装zsh&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;bash&quot;&gt;sudo apt update
+sudo apt install zsh -y
+zsh --version
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;3、设置zsh为默认shell&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;bash&quot;&gt;chsh -s $(which zsh)
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;第三步为linux系统正常步骤，但是由于我使用的是wsl，所以需要其他方法设置，步骤如下&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;text&quot;&gt;1、进入到wsl
+2、输入以下命令
+nano ~&#x2F;.bashrc
+3、在最后一行加上exec zsh
+4、重启wsl
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;4、进入后看到以下内容&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;text&quot;&gt;This is the Z Shell configuration function for new users,
+zsh-newuser-install.
+You are seeing this message because you have no zsh startup files
+(the files .zshenv, .zprofile, .zshrc, .zlogin in the directory
+~).  This function can help you with a few settings that should
+make your use of the shell easier.
+
+You can:
+
+(q)  Quit and do nothing.  The function will be run again next time.
+
+(0)  Exit, creating the file ~&#x2F;.zshrc containing just a comment.
+     That will prevent this function being run again.
+
+(1)  Continue to the main menu.
+
+(2)  Populate your ~&#x2F;.zshrc with the configuration recommended
+     by the system administrator and exit (you will need to edit
+     the file by hand, if so desired).
+
+--- Type one of the keys in parentheses ---
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;选择0，创建一个最干净的 .zshrc 文件，防止与我们后续设置有冲突&lt;br &#x2F;&gt;
+5、输入echo $0，查看是为zsh&lt;br &#x2F;&gt;
+6、输入nano ~&#x2F;.zshrc&lt;br &#x2F;&gt;
+7、在改文件中输入以下配置&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;text&quot;&gt;# Created by newuser for 5.9
+# ========================
+#  Locale &amp;amp; Editor
+# ========================
+export EDITOR=nano
+
+export PATH=&amp;quot;$HOME&#x2F;.atuin&#x2F;bin:$PATH&amp;quot;
+
+# ========================
+#  History
+# ========================
+HISTFILE=&amp;quot;${XDG_STATE_HOME:-$HOME&#x2F;.local&#x2F;state}&#x2F;zsh&#x2F;history&amp;quot;
+mkdir -p &amp;quot;$(dirname &amp;quot;$HISTFILE&amp;quot;)&amp;quot;
+HISTSIZE=10000
+SAVEHIST=10000
+setopt HIST_IGNORE_DUPS HIST_IGNORE_SPACE SHARE_HISTORY INC_APPEND_HISTORY
+
+# ========================
+#  Tools Integration
+# ========================
+if [[ -o interactive ]]; then
+  # AtuIn
+  if command -v atuin &amp;gt;&#x2F;dev&#x2F;null 2&amp;gt;&amp;amp;1; then
+    eval &amp;quot;$(atuin init zsh)&amp;quot;
+  fi
+
+  # zoxide
+  if command -v zoxide &amp;gt;&#x2F;dev&#x2F;null 2&amp;gt;&amp;amp;1; then
+    eval &amp;quot;$(zoxide init zsh)&amp;quot;
+  fi
+
+  # starship
+  if command -v starship &amp;gt;&#x2F;dev&#x2F;null 2&amp;gt;&amp;amp;1; then
+    eval &amp;quot;$(starship init zsh)&amp;quot;
+  fi
+fi
+
+# ========================
+#  Colors &amp;amp; Aliases
+# ========================
+autoload -U colors &amp;amp;&amp;amp; colors
+
+alias ls=&amp;#39;eza --icons=auto --group-directories-first&amp;#39;
+alias ll=&amp;#39;eza -lh --icons=auto --group-directories-first&amp;#39;
+alias la=&amp;#39;eza -lha --icons=auto --group-directories-first&amp;#39;
+
+alias grep=&amp;#39;grep --color=auto&amp;#39;
+alias fgrep=&amp;#39;fgrep --color=auto&amp;#39;
+alias egrep=&amp;#39;egrep --color=auto&amp;#39;
+alias ..=&amp;#39;cd ..&amp;#39;
+alias ...=&amp;#39;cd ..&#x2F;..&amp;#39;
+
+# ========================
+#  Completion
+# ========================
+autoload -Uz compinit
+mkdir -p ~&#x2F;.cache&#x2F;zsh
+compinit -d ~&#x2F;.cache&#x2F;zsh&#x2F;zcompdump
+setopt CORRECT
+
+if [[ -o interactive ]]; then
+  source ~&#x2F;.config&#x2F;zsh&#x2F;plugins&#x2F;zsh-autosuggestions&#x2F;zsh-autosuggestions.zsh
+  source ~&#x2F;.config&#x2F;zsh&#x2F;plugins&#x2F;zsh-syntax-highlighting&#x2F;zsh-syntax-highlighting.zsh
+  source ~&#x2F;.config&#x2F;zsh&#x2F;plugins&#x2F;fzf-tab&#x2F;fzf-tab.plugin.zsh
+
+  ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=&amp;#39;fg=8&amp;#39;
+  ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+  bindkey -e
+fi
+
+# ========================
+#  Prompt
+# ========================
+if ! command -v starship &amp;gt;&#x2F;dev&#x2F;null 2&amp;gt;&amp;amp;1; then
+  PROMPT=&amp;#39;%F{green}%n@%m%f:%F{blue}%~%f %# &amp;#39;
+  RPROMPT=&amp;#39;%F{yellow}[%D{%H:%M}]%f&amp;#39;
+fi
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;8、重启终端，正常linux到这一步不会报错，但是wsl还需要手动下载三个包
+wsl会显示以下信息&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;bash&quot;&gt;compinit:527: no such file or directory: &#x2F;usr&#x2F;share&#x2F;zsh&#x2F;vendor-completions&#x2F;_docker
+&#x2F;home&#x2F;zy&#x2F;.zshrc:source:62: no such file or directory: &#x2F;home&#x2F;zy&#x2F;.config&#x2F;zsh&#x2F;plugins&#x2F;zsh-autosuggestions&#x2F;zsh-autosuggestions.zsh
+&#x2F;home&#x2F;zy&#x2F;.zshrc:source:63: no such file or directory: &#x2F;home&#x2F;zy&#x2F;.config&#x2F;zsh&#x2F;plugins&#x2F;zsh-syntax-highlighting&#x2F;zsh-syntax-highlighting.zsh
+&#x2F;home&#x2F;zy&#x2F;.zshrc:source:64: no such file or directory: &#x2F;home&#x2F;zy&#x2F;.config&#x2F;zsh&#x2F;plugins&#x2F;fzf-tab&#x2F;fzf-tab.plugin.zsh
+zy@DESKTOP-QQE1B0K:&#x2F;mnt&#x2F;c&#x2F;Users&#x2F;zy %
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;输入如下命令&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;bash&quot;&gt;mkdir -p ~&#x2F;.config&#x2F;zsh&#x2F;plugins &amp;amp;&amp;amp; \
+cd ~&#x2F;.config&#x2F;zsh&#x2F;plugins &amp;amp;&amp;amp; \
+git clone https:&#x2F;&#x2F;github.com&#x2F;zsh-users&#x2F;zsh-autosuggestions &amp;amp;&amp;amp; \
+git clone https:&#x2F;&#x2F;github.com&#x2F;zsh-users&#x2F;zsh-syntax-highlighting &amp;amp;&amp;amp; \
+git clone https:&#x2F;&#x2F;github.com&#x2F;Aloxaf&#x2F;fzf-tab
+
+sudo apt install fzf -y
+sudo apt install eza -y
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;这三个插件分别是：&lt;br &#x2F;&gt;
+zsh-autosuggestions右箭头自动补全（你最想要的）&lt;br &#x2F;&gt;
+zsh-syntax-highlighting命令高亮（绿色 &#x2F; 红色）&lt;br &#x2F;&gt;
+fzf-tab TAB 补全（模糊搜索 + 下拉选择）&lt;&#x2F;p&gt;
+&lt;p&gt;eza是ls的增强版，支持图标、颜色等。&lt;&#x2F;p&gt;
+&lt;p&gt;运行完后输入source ~&#x2F;.zshrc，重启终端即可&lt;&#x2F;p&gt;
+&lt;p&gt;9、接下来安装上键唤起历史记录&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;bash&quot;&gt;curl --proto &amp;#39;=https&amp;#39; --tlsv1.2 -sSf https:&#x2F;&#x2F;setup.atuin.sh | sh
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;注意安装过程中会出现多个选项，每个选项都需要仔细查看一下，避免误选到不需要的功能，徒增麻烦&lt;&#x2F;p&gt;
+&lt;p&gt;10、安装终端美化工具Starship&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;bash&quot;&gt;curl -sS https:&#x2F;&#x2F;starship.rs&#x2F;install.sh | sh
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;11、创建美化配置文件&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;bash&quot;&gt;nano ~&#x2F;.config&#x2F;starship.toml
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;进入后粘贴以下配置文件&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;bash&quot;&gt;add_newline = false
+
+[character]
+success_symbol = &amp;quot;[❯](green)&amp;quot;
+error_symbol = &amp;quot;[❯](red)&amp;quot;
+
+[directory]
+style = &amp;quot;blue&amp;quot;
+truncation_length = 3
+
+[git_branch]
+symbol = &amp;quot;🌿 &amp;quot;
+style = &amp;quot;purple&amp;quot;
+
+[git_status]
+style = &amp;quot;red&amp;quot;
+
+[nodejs]
+symbol = &amp;quot;🟢 &amp;quot;
+
+[python]
+symbol = &amp;quot;🐍 &amp;quot;
+
+[cmd_duration]
+min_time = 500
+format = &amp;quot;⏱️ [$duration]($style)&amp;quot;
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;粘贴完后保存推出，最后重启终端配置完成&lt;&#x2F;p&gt;
+&lt;p&gt;最后如果想安装fastfetch，可以按照下面的命令安装&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;bash&quot;&gt;sudo add-apt-repository ppa:zhangsongcui3371&#x2F;fastfetch
+sudo apt update
+sudo apt install fastfetch
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</description>
+      </item>
+    </channel>
+</rss>
