@@ -15,6 +15,7 @@ tags = ["shell"]
 我们的目标是要让powershell有自动补全，查看历史记录，命令高亮和Git提示，样式优化。
 
 安装模块
+
 ```bash
 # 模糊搜索工具
 winget install junegunn.fzf
@@ -33,18 +34,23 @@ winget install JanDeDobbeleer.OhMyPosh
 #验证安装
 oh-my-posh version
 ```
+
 安装图标字体
+
 ```bash
 oh-my-posh font install
 # 推荐选择：JetBrainsMono
 ```
 
 写入配置文件
+
 ```bash
 notepad $PROFILE
 ```
+
 配置文件
-```
+
+```text
 # ---------- PSReadLine ----------
 Import-Module PSReadLine
 Set-PSReadLineOption -PredictionSource History
@@ -75,6 +81,7 @@ Set-PSReadLineKeyHandler -Key Ctrl+u -Function BackwardDeleteLine
 # Ctrl+K → 删除从光标到行尾
 Set-PSReadLineKeyHandler -Key Ctrl+k -Function ForwardDeleteLine
 ```
+
 保存后重启终端可看到美化和其他功能均出现，但有可能出现乱码，此为字体问题，修复步骤如下  
 1、打开终端  
 2、输入ctrl+,  
@@ -102,17 +109,22 @@ shell是核心执行者，负责解析你输入的命令并交给操作系统执
 配置zsh的步骤如下  
 1、打开终端  
 2、输入以下命令安装zsh  
+
 ```bash
 sudo apt update
 sudo apt install zsh -y
 zsh --version
 ```
+
 3、设置zsh为默认shell
+
 ```bash
 chsh -s $(which zsh)
 ```
+
 第三步为linux系统正常步骤，但是由于我使用的是wsl，所以需要其他方法设置，步骤如下
-```
+
+```text
 1、进入到wsl
 2、输入以下命令
 nano ~/.bashrc
@@ -121,7 +133,8 @@ nano ~/.bashrc
 ```
 
 4、进入后看到以下内容
-```
+
+```text
 This is the Z Shell configuration function for new users,
 zsh-newuser-install.
 You are seeing this message because you have no zsh startup files
@@ -144,11 +157,13 @@ You can:
 
 --- Type one of the keys in parentheses ---
 ```
+
 选择0，创建一个最干净的 .zshrc 文件，防止与我们后续设置有冲突  
 5、输入echo $0，查看是为zsh  
 6、输入nano ~/.zshrc  
 7、在改文件中输入以下配置
-```
+
+```text
 # Created by newuser for 5.9
 # ========================
 #  Locale & Editor
@@ -228,8 +243,10 @@ if ! command -v starship >/dev/null 2>&1; then
   RPROMPT='%F{yellow}[%D{%H:%M}]%f'
 fi
 ```
+
 8、重启终端，正常linux到这一步不会报错，但是wsl还需要手动下载三个包
 wsl会显示以下信息
+
 ```bash
 compinit:527: no such file or directory: /usr/share/zsh/vendor-completions/_docker
 /home/zy/.zshrc:source:62: no such file or directory: /home/zy/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -237,7 +254,9 @@ compinit:527: no such file or directory: /usr/share/zsh/vendor-completions/_dock
 /home/zy/.zshrc:source:64: no such file or directory: /home/zy/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 zy@DESKTOP-QQE1B0K:/mnt/c/Users/zy %
 ```
+
 输入如下命令
+
 ```bash
 mkdir -p ~/.config/zsh/plugins && \
 cd ~/.config/zsh/plugins && \
@@ -248,6 +267,7 @@ git clone https://github.com/Aloxaf/fzf-tab
 sudo apt install fzf -y
 sudo apt install eza -y
 ```
+
 这三个插件分别是：  
 zsh-autosuggestions右箭头自动补全（你最想要的）  
 zsh-syntax-highlighting命令高亮（绿色 / 红色）  
@@ -258,20 +278,27 @@ eza是ls的增强版，支持图标、颜色等。
 运行完后输入source ~/.zshrc，重启终端即可
 
 9、接下来安装上键唤起历史记录
+
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://setup.atuin.sh | sh
 ```
+
 注意安装过程中会出现多个选项，每个选项都需要仔细查看一下，避免误选到不需要的功能，徒增麻烦
 
 10、安装终端美化工具Starship
+
 ```bash
 curl -sS https://starship.rs/install.sh | sh
 ```
+
 11、创建美化配置文件
+
 ```bash
 nano ~/.config/starship.toml
 ```
+
 进入后粘贴以下配置文件
+
 ```bash
 add_newline = false
 
@@ -300,9 +327,11 @@ symbol = "🐍 "
 min_time = 500
 format = "⏱️ [$duration]($style)"
 ```
+
 粘贴完后保存推出，最后重启终端配置完成
 
 最后如果想安装fastfetch，可以按照下面的命令安装
+
 ```bash
 sudo add-apt-repository ppa:zhangsongcui3371/fastfetch
 sudo apt update
